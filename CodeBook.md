@@ -31,6 +31,7 @@ Merge the activity labels data frame with the current data frame via activityId.
 
 ## 4) Appropriately labels the data set with descriptive variable names. 
 
-
+Use the gsub function to adapt the existing text into a "better looking" (sexier? :P) text. Looking at names() to see what needs to be modified.
 
 ## 5) From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+
