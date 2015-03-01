@@ -23,11 +23,11 @@ Here, I read into tables and use cbind() and rbind() to merge the data present i
 
 ## 2) Extracts only the measurements on the mean and standard deviation for each measurement. 
 
-
+Get the valid columns by using grep with the names() of the columns, and consider only those columns. Cbind the activity ID column due to the way I did the extraction.
 
 ## 3) Uses descriptive activity names to name the activities in the data set
 
-
+Merge the activity labels data frame with the current data frame via activityId.
 
 ## 4) Appropriately labels the data set with descriptive variable names. 
 

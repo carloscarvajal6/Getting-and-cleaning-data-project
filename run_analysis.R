@@ -36,11 +36,15 @@ data = rbind(train,test);
 
 validFeats <- grep("-(mean|std)\\(\\)", names(data))
 
-meanAndStd <- data[,validFeats]
+meanStd <- data[,validFeats]
+
+#re-add activity ID as column and correct its name
+data = cbind(data$activityId,meanStd)
+colnames(data)[1] = "activityId"
 
 ## 3) Uses descriptive activity names to name the activities in the data set
 
-
+data = merge(data,activityLabels,by='activityId',all.x=TRUE);
 
 ## 4) Appropriately labels the data set with descriptive variable names. 
 
