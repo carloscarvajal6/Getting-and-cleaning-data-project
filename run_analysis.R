@@ -5,14 +5,32 @@ rm(list=ls())
 
 setwd("C:/Users/mishen'ka/Documents/Coursera/data-science-coursera/gandcdata/UCI HAR Dataset")
 
-## 1) Merges the training and the test sets to create one data set.
-
 #read data
 features = read.table("./features.txt",header=FALSE);
 activityLabels = read.table("./activity_labels.txt",header=FALSE);
 subjectTrain = read.table("./train/subject_train.txt",header=FALSE);
 xTrain = read.table("./train/X_train.txt",header=FALSE);
 yTrain = read.table("./train/y_train.txt",header=FALSE);
+subjectTest = read.table("./test/subject_test.txt",header=FALSE);
+xTest = read.table("./test/X_test.txt",header=FALSE);
+yTest = read.table("./test/y_test.txt",header=FALSE);
+
+#assign column names
+colnames(activityLabels) = c('activityId','activityType');
+colnames(subjectTrain) = "subjectId";
+colnames(xTrain) = features[,2]; 
+colnames(yTrain) = "activityId";
+colnames(subjectTest) = "subjectId";
+colnames(xTest) = features[,2]; 
+colnames(yTest) = "activityId";
+
+## 1) Merges the training and the test sets to create one data set.
+
+#mix train and test data separately, and then all together
+
+train = cbind(xTrain,yTrain,subjectTrain);
+test = cbind(xTest,yTest,subjectTest);
+data = rbind(train,test);
 
 ## 2) Extracts only the measurements on the mean and standard deviation for each measurement. 
 

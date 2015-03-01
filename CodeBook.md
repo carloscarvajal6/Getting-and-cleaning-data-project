@@ -19,7 +19,7 @@ For each record in the dataset it is provided:
 
 ## 1) Merges the training and the test sets to create one data set.
 
-
+Here, I read into tables and use cbind() and rbind() to merge the data present in the train and test folders: X_train.txt, X_train.txt, y_test.txt, y_train.txt, subject_test.txt, and subject_train.txt .
 
 ## 2) Extracts only the measurements on the mean and standard deviation for each measurement. 
 
