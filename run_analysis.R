@@ -66,6 +66,9 @@ for (i in 1:length(varNames)){
 
 #and actual assignment of sexier names
 
-colnames(data) = varNames
+colnames(data) = varNames;
 
 ## 5) From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+
+#finish this... think of subjectID
+
