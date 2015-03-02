@@ -2,7 +2,6 @@
 rm(list=ls())
 
 ## setwd
-
 setwd("C:/Users/mishen'ka/Documents/Coursera/data-science-coursera/gandcdata/UCI HAR Dataset");
 
 #read data
@@ -50,7 +49,6 @@ data = merge(activityLabels,data,by='activityId',all.y=TRUE);
 ## 4) Appropriately labels the data set with descriptive variable names. 
 
 #direct cleanup
-
 names(data) <- gsub("\\(\\)","",names(data));
 names(data) <- gsub("-mean","Mean",names(data));
 names(data) <- gsub("-std","StandardDeviation",names(data));
