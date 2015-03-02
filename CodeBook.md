@@ -31,7 +31,10 @@ Merge the activity labels data frame with the current data frame via activityId.
 
 ## 4) Appropriately labels the data set with descriptive variable names. 
 
-Use the gsub function to adapt the existing text into a "better looking" (sexier? :P) text. Looking at names() to see what needs to be modified. Here, removing brackets and adapting text was my chosen way to go. Replace "t" and "f" by Time and Frequency, besides enlarging shortened words that I could get, as acceletarion and magnitude. I opted for leaving Gyro and Jerk as they were, because they were noticeable enough. 
+Use the gsub function to adapt the existing text into a "better looking" (sexier? :P) text. Looking at names() to see what needs to be modified. Here, removing brackets and adapting text was my chosen way to go. Replace "t" and "f" by Time and Frequency, besides enlarging shortened words that I could get, as acceletarion and magnitude. I opted for leaving Gyro and Jerk as they were, because they were noticeable enough.
 
 ## 5) From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+
+Use the ddply function from the plyr package to easily apply the colMeans function to each activityId/activityType/subjectId subset. Save this result into a new, tidy, data frame. Add in names() the "MeanOf" particle, so it is clear that those values correspond to the means of such variables. Then, this resulting data frame is saved into tidyDF.txt via write.table.
+
 

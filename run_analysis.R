@@ -49,27 +49,27 @@ data = merge(activityLabels,data,by='activityId',all.y=TRUE);
 
 ## 4) Appropriately labels the data set with descriptive variable names. 
 
-#use names list
-varNames <- names(data);
+#direct cleanup
 
-#background cleanup
-
-for (i in 1:length(varNames)){
-      varNames[i] = gsub("\\(\\)","",varNames[i]);
-      varNames[i] = gsub("-mean","Mean",varNames[i]);
-      varNames[i] = gsub("-std","StandardDeviation",varNames[i]);
-      varNames[i] = gsub("^t","Time",varNames[i]);
-      varNames[i] = gsub("^f","Frequency",varNames[i]);
-      varNames[i] = gsub("Acc","Acceleration",varNames[i]);
-      varNames[i] = gsub("Mag","Magnitude",varNames[i]);
-      varNames[i] = gsub("BodyBody","Body",varNames[i]);
-}
-
-#and actual assignment of sexier names
-
-colnames(data) = varNames;
+names(data) <- gsub("\\(\\)","",names(data));
+names(data) <- gsub("-mean","Mean",names(data));
+names(data) <- gsub("-std","StandardDeviation",names(data));
+names(data) <- gsub("^t","Time",names(data));
+names(data) <- gsub("^f","Frequency",names(data));
+names(data) <- gsub("Acc","Acceleration",names(data));
+names(data) <- gsub("Mag","Magnitude",names(data));
+names(data) <- gsub("BodyBody","Body",names(data));
 
 ## 5) From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
-#finish this... think of subjectID
+#import plyr for ddply
+library(plyr);
 
+#apply colMeans to each unique triplet
+tidyDF <- ddply(data, .(activityId,activityType,subjectId), function(x){colMeans(x[,-c(1,2,3)])});
+
+#correct names
+names(tidyDF)[-c(1,2,3)] <- paste0("MeanOf", names(tidyDF)[-c(1,2,3)]);
+
+#save file
+write.table(tidyDF, "tidyDF.txt", row.names = FALSE)
