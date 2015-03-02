@@ -3,7 +3,7 @@ rm(list=ls())
 
 ## setwd
 
-setwd("C:/Users/mishen'ka/Documents/Coursera/data-science-coursera/gandcdata/UCI HAR Dataset")
+setwd("C:/Users/mishen'ka/Documents/Coursera/data-science-coursera/gandcdata/UCI HAR Dataset");
 
 #read data
 features = read.table("./features.txt",header=FALSE);
@@ -28,23 +28,24 @@ colnames(yTest) = "activityId";
 
 #mix train and test data separately, and then all together
 
-train = cbind(xTrain,yTrain,subjectTrain);
-test = cbind(xTest,yTest,subjectTest);
+train = cbind(subjectTrain,yTrain,xTrain);
+test = cbind(subjectTest,yTest,xTest);
 data = rbind(train,test);
 
 ## 2) Extracts only the measurements on the mean and standard deviation for each measurement. 
 
-validFeats <- grep("-(mean|std)\\(\\)", names(data));
+#mean and std
+meanStdFeats <- grep("-(mean|std)\\(\\)", names(data));
+#ids
+idsFeats <- grep("Id", names(data));
+#valid features
+validFeats <- sort(c(meanStdFeats,idsFeats));
 
-meanStd <- data[,validFeats];
-
-#re-add activity ID as column and correct its name
-data = cbind(data$activityId,meanStd);
-colnames(data)[1] = "activityId";
+data <- data[,validFeats];
 
 ## 3) Uses descriptive activity names to name the activities in the data set
 
-data = merge(data,activityLabels,by='activityId',all.x=TRUE);
+data = merge(activityLabels,data,by='activityId',all.y=TRUE);
 
 ## 4) Appropriately labels the data set with descriptive variable names. 
 
